@@ -36,6 +36,11 @@ npm install
 
 The admin user can create posts by navigating to the /admin/create-post route.
 
+# Middleware
+
+1- auth.js
+2- redirect-if-authenticated.js
+
 ## Store Configuration:
 
 The blogStore.js file in the store directory is used to manage the state of blog posts and categories. It uses Firebase Firestore to fetch and store data. The store also implements caching for Firestore blog data and persists user login data.
