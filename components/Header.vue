@@ -1,26 +1,21 @@
 <template>
-  <header class="bg-white shadow-md p-4 flex justify-between items-center">
-    <div class="flex items-center space-x-4">
-      <NuxtImg
-        src="https://picsum.photos/200/300"
-        alt="Event Logo"
-        class="w-16"
-        width="64"
-        height="64"
-      />
-      <h1 class="text-lg font-bold">Event Ideas</h1>
+  <header
+    class="flex items-center justify-between py-8 px-24 bg-white shadow-md"
+  >
+    <div class="flex">
+      <div class="flex items-center space-x-2">
+        <NuxtLink to="/">
+          <NuxtImg src="/img/logo.png" class="h-12" />
+        </NuxtLink>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="flex items-center text-sm text-gray-600">
+        <phone-icon class="mr-6" />
+        <span>+1 (628) 587-3235</span>
+      </div>
     </div>
-    <nav>
-      <ul class="flex space-x-4">
-        <li><NuxtLink to="/" class="hover:text-blue-600">Home</NuxtLink></li>
-        <li>
-          <NuxtLink to="/about" class="hover:text-blue-600">About</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/contact" class="hover:text-blue-600">Contact</NuxtLink>
-        </li>
-      </ul>
-    </nav>
+
     <div>
       <button
         v-if="!isAuthenticated"
@@ -49,6 +44,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const isAuthenticated = computed(() => !!authStore.user);
+const userEmail = computed(() => authStore.user?.email || "");
 
 const navigateToLogin = () => {
   router.push("/auth/login");
@@ -56,9 +52,10 @@ const navigateToLogin = () => {
 
 const logout = () => {
   authStore.logout();
+  navigateToLogin();
 };
 </script>
 
-<style>
+<style scoped>
 /* Add any custom styles here */
 </style>

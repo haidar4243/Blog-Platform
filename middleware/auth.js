@@ -1,4 +1,3 @@
-// filepath: /Users/macbookpro/Work/Blog-Platform/middleware/auth.js
 import { useAuthStore } from "~/store/authStore";
 
 export default defineNuxtRouteMiddleware((to, from) => {

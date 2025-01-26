@@ -7,7 +7,12 @@ export default defineNuxtConfig({
     "pinia-plugin-persistedstate/nuxt",
   ],
   plugins: ["~/plugins/firestore.js", "~/plugins/firebaseAuth.js"],
-  image: {},
+  image: {
+    domains: [],
+    alias: {
+      logo: "/assets/logo.png",
+    },
+  },
   build: {
     transpile: [],
   },

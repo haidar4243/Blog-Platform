@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { collection, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
 import { useNuxtApp } from "#app";
+import { collection, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
 
 export const useBlogStore = defineStore("blog", {
   state: () => ({
@@ -13,9 +13,10 @@ export const useBlogStore = defineStore("blog", {
       try {
         const { $firestore } = useNuxtApp();
         const querySnapshot = await getDocs(collection($firestore, "posts"));
-        this.posts = querySnapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .slice(0, 6);
+        this.posts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -51,7 +52,7 @@ export const useBlogStore = defineStore("blog", {
     },
     async addPost(title, description, imageUrl) {
       if (!title || !description || !imageUrl) {
-        throw new Error("All fields are required fk");
+        throw new Error("All fields are required");
       }
       try {
         const { $firestore } = useNuxtApp();
