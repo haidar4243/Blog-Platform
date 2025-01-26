@@ -8,9 +8,8 @@
           alt="Post Image"
           class="w-full h-auto mb-6 rounded-lg"
         />
-        <p class="text-gray-500 mb-2">
-          Post ID: <span class="font-semibold">{{ route.params.id }}</span>
-        </p>
+
+        <p class="text-gray-600 mb-4">{{ post.description }}</p>
         <p class="text-gray-600 mb-6">{{ post.body }}</p>
       </div>
       <div v-else-if="loading">
@@ -27,22 +26,31 @@
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useBlogStore } from "~/store/blogStore";
+import { useNuxtApp } from "#app";
 
 const route = useRoute();
 const blogStore = useBlogStore();
+const { $firestore } = useNuxtApp();
+
+const post = ref(null);
 const loading = ref(true);
 
-const post = computed(() => blogStore.post);
+const fetchPost = async () => {
+  try {
+    await blogStore.fetchPostById(route.params.id);
+    post.value = blogStore.post;
+  } catch (error) {
+    console.error("Error fetching post:", error);
+  } finally {
+    loading.value = false;
+  }
+};
 
-onMounted(async () => {
-  await blogStore.fetchPostById(route.params.id);
-  loading.value = false;
+onMounted(() => {
+  fetchPost();
 });
 </script>
 
-<style>
+<style scoped>
 /* Add any custom styles here */
-.container {
-  max-width: 800px;
-}
 </style>
