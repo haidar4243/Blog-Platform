@@ -32,35 +32,18 @@ This is a Blog Platform built with Nuxt.js, Pinia, and Firebase. The platform al
 
 npm install
 
-# pnpm
+## Admin Interface
 
-pnpm install
-
-# yarn
-
-yarn install
-
-# bun
-
-bun install
-
-Code Explanation
-Authentication
-Firebase is used for authentication. The admin user credentials are:
-
-Email: admin@gmail.com
-Password: password
-
-Admin Interface
 The admin user can create posts by navigating to the /admin/create-post route.
 
-Store Configuration:
+## Store Configuration:
+
 The blogStore.js file in the store directory is used to manage the state of blog posts and categories. It uses Firebase Firestore to fetch and store data. The store also implements caching for Firestore blog data and persists user login data.
 
-Components#
+## Components
 
-Card Component:
-The Card.vue component is used to display individual blog posts.
-
-PopularArticles:
-The PopularArticles.vue component is used to display a list of popular articles.
+1- Card
+2- Header
+3- Footer
+4- HeroSection
+5- PopularArticles
